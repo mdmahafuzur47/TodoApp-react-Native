@@ -28,12 +28,25 @@ const App = () => {
     setData(d => d.filter(todo => todo.id !== id));
   };
 
+  const updateTodo = (id: string, newText: string) => {
+    setData(d =>
+      d.map(todo =>
+        todo.id === id
+          ? {
+              ...todo,
+              text: newText,
+            }
+          : todo,
+      ),
+    );
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.headText}>Todo App</Text>
       {/* Add Todo Form  */}
       <AddTodoForm addTodo={addTodo} />
-      <ShowTodo deleteTodo={deleteTodo} todos={data} />
+      <ShowTodo updateTodo={updateTodo} deleteTodo={deleteTodo} todos={data} />
     </View>
   );
 };
